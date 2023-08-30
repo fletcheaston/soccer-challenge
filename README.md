@@ -71,3 +71,7 @@ Please use platform-agnostic constructs where possible (line-endings and file-pa
 
 Once you have sent us your project, we will review the code with our team members and rate it appropiately.
 If everything looks fine, we would like to have a code review interview with you where we will be going over what you sent us, as well as requesting a few changes in the code to see if the output can be altered. An example of what you can be expecting can be seen in this documentation: [goal-differential-instructions.md](goal-differential-instructions.md)
+
+# Fletcher's Notes
+
+Started on 08/29/2023 at ~9:10pm PT.
