@@ -1,8 +1,28 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 from typer import Typer
 
 cli = Typer()
+
+
+@dataclass
+class Game:
+    team_a: str
+    team_a_goals: int
+
+    team_b: str
+    team_b_goals: int
+
+    @property
+    def winner(self) -> str | None:
+        if self.team_a_goals > self.team_b_goals:
+            return self.team_a
+
+        if self.team_a_goals < self.team_b_goals:
+            return self.team_b
+
+        return None
 
 
 @cli.command()
