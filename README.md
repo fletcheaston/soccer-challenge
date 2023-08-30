@@ -94,3 +94,40 @@ Started on 08/29/2023 at ~9:10pm PT.
 5. Write tests validating functionality
 
 6. Documentation
+
+## Setup
+
+This setup assumes you have conda installed.
+Find more info [here](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) about installing and setting up conda.
+
+Replace `{env name}` below with your desired conda environment name.
+
+1. Create a conda environment for the app
+    ```shell
+    conda create -n {env name} python=3.11
+    ```
+
+2. Activate the conda environment
+    ```shell
+    conda activate {env name}
+    ```
+
+3. Install app dependencies (multiple options avilable)
+   1. Install all dependencies (easiest option)
+       ```shell
+       pip install '.[dev,test]'
+       ```
+   2. Install only dependencies required to run the CLI (production-ready option)
+       ```shell
+       pip install .
+       ```
+   3. Install dev dependencies to run the CLI and perform linting, type checking, etc. (dev option)
+       ```shell
+       pip install '.[dev]'
+       ```
+   4. Install dependencies to run the CLI and run tests (CI option)
+       ```shell
+       pip install '.[test]'
+       ```
+
+4. Add your conda environment to your IDE
