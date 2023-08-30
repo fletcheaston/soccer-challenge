@@ -75,3 +75,22 @@ If everything looks fine, we would like to have a code review interview with you
 # Fletcher's Notes
 
 Started on 08/29/2023 at ~9:10pm PT.
+
+## Plan
+
+1. Project setup/boilerplate files
+   - [Conda](https://docs.conda.io/en/latest/) for environment management
+   - [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for requirements
+   - [Typer](https://typer.tiangolo.com/) for the CLI tool
+   - [Pytest](https://docs.pytest.org/en/7.4.x/) for the testing tool
+   - [Ruff](https://beta.ruff.rs/docs/), [Black](https://black.readthedocs.io/en/stable/), and [Mypy](https://mypy-lang.org/) for dev tooling
+
+2. Read and parse data from a given file path
+
+3. Put data into nice data structures
+
+4. Produce output file for a given file path
+
+5. Write tests validating functionality
+
+6. Documentation
