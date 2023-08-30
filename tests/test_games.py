@@ -11,6 +11,9 @@ def test_team_a_wins_game() -> None:
 
     assert game.winner == "A"
 
+    assert game.points_for("A") == 3
+    assert game.points_for("B") == 0
+
 
 def test_team_b_wins_game() -> None:
     game = Game(
@@ -22,6 +25,9 @@ def test_team_b_wins_game() -> None:
 
     assert game.winner == "B"
 
+    assert game.points_for("A") == 0
+    assert game.points_for("B") == 3
+
 
 def test_tie_game() -> None:
     game = Game(
@@ -32,3 +38,6 @@ def test_tie_game() -> None:
     )
 
     assert game.winner is None
+
+    assert game.points_for("A") == 1
+    assert game.points_for("B") == 1
