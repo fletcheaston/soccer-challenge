@@ -48,7 +48,23 @@ class Game:
 
 
 @dataclass
-class SoccerLeague:
+class Ranking:
+    place: int
+    team: str
+    points: int
+
+    def __str__(self) -> str:
+        return f"{self.place}. {self.team}, {self.points} pt{'' if self.points == 1 else 's'}"
+
+    def __lt__(self, other: "Ranking") -> bool:
+        if self.place == other.place:
+            return self.team < other.team
+
+        return self.place < other.place
+
+
+@dataclass
+class League:
     _games: list[Game] = field(default_factory=list)
     _team_points: Counter[str] = field(default_factory=Counter)
 
@@ -61,8 +77,13 @@ class SoccerLeague:
         self._team_points[game.team_b] += game.points_for(game.team_b)
 
     @property
-    def team_rankings(self) -> None:
-        return None
+    def teams(self) -> set[str]:
+        return set(self._team_points.keys())
+
+    @property
+    def team_rankings(self) -> list[Ranking]:
+        """Returns a sorted list of team rankings"""
+        return []
 
 
 @cli.command()
