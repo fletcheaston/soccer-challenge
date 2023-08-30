@@ -1,6 +1,9 @@
+import pytest
+
 from cli import Game
 
 
+@pytest.mark.unit
 def test_team_a_wins_game() -> None:
     game = Game(
         team_a="A",
@@ -15,6 +18,7 @@ def test_team_a_wins_game() -> None:
     assert game.points_for("B") == 0
 
 
+@pytest.mark.unit
 def test_team_b_wins_game() -> None:
     game = Game(
         team_a="A",
@@ -29,6 +33,7 @@ def test_team_b_wins_game() -> None:
     assert game.points_for("B") == 3
 
 
+@pytest.mark.unit
 def test_tie_game() -> None:
     game = Game(
         team_a="A",

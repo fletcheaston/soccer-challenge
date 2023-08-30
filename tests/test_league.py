@@ -1,6 +1,9 @@
+import pytest
+
 from cli import Game, League, Ranking
 
 
+@pytest.mark.integration
 def test_simple_team_ranking_in_league() -> None:
     league = League()
 
@@ -19,6 +22,7 @@ def test_simple_team_ranking_in_league() -> None:
     ]
 
 
+@pytest.mark.integration
 def test_complex_team_ranking_in_league() -> None:
     league = League()
 

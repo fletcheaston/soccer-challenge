@@ -81,3 +81,8 @@ line-length = 88
 python_functions = [
     "test_",
 ]
+markers = [
+    "unit",
+    "integration",
+    "e2e",
+]

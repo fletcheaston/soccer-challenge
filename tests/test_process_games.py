@@ -1,6 +1,7 @@
 import filecmp
 import os
 
+import pytest
 from typer.testing import CliRunner
 
 from cli import cli
@@ -9,6 +10,7 @@ import contextlib
 runner = CliRunner()
 
 
+@pytest.mark.e2e
 def test_fails_with_nonexistant_input_file() -> None:
     result = runner.invoke(
         cli,
@@ -21,6 +23,7 @@ def test_fails_with_nonexistant_input_file() -> None:
     assert result.exit_code != 0
 
 
+@pytest.mark.e2e
 def test_output_file_matches_expected_output_file() -> None:
     # Remove the "sample-output.txt" file if it exists
     with contextlib.suppress(Exception):

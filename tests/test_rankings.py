@@ -49,6 +49,7 @@ def grouches_ranking() -> Ranking:
     )
 
 
+@pytest.mark.unit
 @pytest.mark.parametrize(
     "ranking,string",
     [
@@ -66,6 +67,7 @@ def test_ranking_str(
     assert str(ranking) == string
 
 
+@pytest.mark.unit
 def test_ranking_order(
     tarantulas_ranking: Ranking,
     lions_ranking: Ranking,
