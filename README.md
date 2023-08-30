@@ -1,3 +1,65 @@
+
+# Fletcher's Notes
+
+Started on 08/29/2023 at ~9:10pm PT.
+
+## Plan
+
+1. Project setup/boilerplate files
+   - [Conda](https://docs.conda.io/en/latest/) for environment management
+   - [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for requirements
+   - [Typer](https://typer.tiangolo.com/) for the CLI tool
+   - [Pytest](https://docs.pytest.org/en/7.4.x/) for the testing tool
+   - [Ruff](https://beta.ruff.rs/docs/), [Black](https://black.readthedocs.io/en/stable/), and [Mypy](https://mypy-lang.org/) for dev tooling
+
+2. Read and parse data from a given file path
+
+3. Put data into nice data structures
+
+4. Produce output file for a given file path
+
+5. Write tests validating functionality
+
+6. Documentation
+
+## Setup
+
+This setup assumes you have conda installed.
+Find more info [here](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) about installing and setting up conda.
+
+Replace `{env name}` below with your desired conda environment name.
+
+1. Create a conda environment for the app
+    ```shell
+    conda create -n {env name} python=3.11
+    ```
+
+2. Activate the conda environment
+    ```shell
+    conda activate {env name}
+    ```
+
+3. Install app dependencies (multiple options avilable)
+   1. Install all dependencies (easiest option)
+       ```shell
+       pip install '.[dev,test]'
+       ```
+   2. Install only dependencies required to run the CLI (production-ready option)
+       ```shell
+       pip install .
+       ```
+   3. Install dev dependencies to run the CLI and perform linting, type checking, etc. (dev option)
+       ```shell
+       pip install '.[dev]'
+       ```
+   4. Install dependencies to run the CLI and run tests (CI option)
+       ```shell
+       pip install '.[test]'
+       ```
+
+4. Add your conda environment to your IDE
+
+
 # The Challenge
 
 We want you to create a command-line application that will calculate the
@@ -71,63 +133,3 @@ Please use platform-agnostic constructs where possible (line-endings and file-pa
 
 Once you have sent us your project, we will review the code with our team members and rate it appropiately.
 If everything looks fine, we would like to have a code review interview with you where we will be going over what you sent us, as well as requesting a few changes in the code to see if the output can be altered. An example of what you can be expecting can be seen in this documentation: [goal-differential-instructions.md](goal-differential-instructions.md)
-
-# Fletcher's Notes
-
-Started on 08/29/2023 at ~9:10pm PT.
-
-## Plan
-
-1. Project setup/boilerplate files
-   - [Conda](https://docs.conda.io/en/latest/) for environment management
-   - [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for requirements
-   - [Typer](https://typer.tiangolo.com/) for the CLI tool
-   - [Pytest](https://docs.pytest.org/en/7.4.x/) for the testing tool
-   - [Ruff](https://beta.ruff.rs/docs/), [Black](https://black.readthedocs.io/en/stable/), and [Mypy](https://mypy-lang.org/) for dev tooling
-
-2. Read and parse data from a given file path
-
-3. Put data into nice data structures
-
-4. Produce output file for a given file path
-
-5. Write tests validating functionality
-
-6. Documentation
-
-## Setup
-
-This setup assumes you have conda installed.
-Find more info [here](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) about installing and setting up conda.
-
-Replace `{env name}` below with your desired conda environment name.
-
-1. Create a conda environment for the app
-    ```shell
-    conda create -n {env name} python=3.11
-    ```
-
-2. Activate the conda environment
-    ```shell
-    conda activate {env name}
-    ```
-
-3. Install app dependencies (multiple options avilable)
-   1. Install all dependencies (easiest option)
-       ```shell
-       pip install '.[dev,test]'
-       ```
-   2. Install only dependencies required to run the CLI (production-ready option)
-       ```shell
-       pip install .
-       ```
-   3. Install dev dependencies to run the CLI and perform linting, type checking, etc. (dev option)
-       ```shell
-       pip install '.[dev]'
-       ```
-   4. Install dependencies to run the CLI and run tests (CI option)
-       ```shell
-       pip install '.[test]'
-       ```
-
-4. Add your conda environment to your IDE
