@@ -2,6 +2,7 @@
 # Fletcher's Notes
 
 Started on 08/29/2023 at ~9:10pm PT.
+Completed (with documentation, tests, etc.) on 08/29/2023 at ~11:48pm PT.
 
 ## Plan
 
