@@ -1,12 +1,13 @@
+import logging
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from typer import Typer
 
-cli = Typer()
 
-
+################################################################################
+# Data structures
 @dataclass
 class Game:
     team_a: str
@@ -107,17 +108,79 @@ class League:
         return sorted(rankings)
 
 
+################################################################################
+# CLI command(s)
+cli = Typer()
+
+
 @cli.command()
-def parse_games(input_file: Path) -> None:
-    """Read the games from the specified "input_file", parse each line as a game."""
+def process_games(input_file: Path, output_file: Path) -> None:
+    """
+    ===========================================================================
+
+    Steps:
+
+    1. Read the games from the specified "input_file"
+
+    2. Parse each line as a game
+
+    3. Rank the teams
+
+    4. Save the ranking to the specified "output_file"
+
+    ===========================================================================
+
+    Some assumptions about the input file...
+
+    - Only one comma per line, separating the two teams/goals
+    - Team names may consist of any characters, excluding commas
+
+    ===========================================================================
+    """
 
     if not input_file.exists():
         raise ValueError("Input file doesn't exist.")
 
+    if output_file.exists():
+        logging.warning("Output file already exists, overwriting.")
 
-@cli.command()
-def placeholder() -> None:
-    pass
+    # Data structure setup
+    leage = League()
+
+    # 1. Read the games from the specified "input_file"
+    with open(input_file) as f:
+        for line in f.readlines():
+            # 2. Parse each line as a game
+            # Each string in the format "{team name} #"
+            team_goals_a, team_goals_b = line.split(",")
+
+            # Remove the " #" to get team name
+            # Remove extra whitespace, gross
+            team_a = " ".join(team_goals_a.split(" ")[:-1]).strip()
+            team_b = " ".join(team_goals_b.split(" ")[:-1]).strip()
+
+            # Only keep the "#" to get team goals
+            goals_a = int(team_goals_a.split(" ")[-1])
+            goals_b = int(team_goals_b.split(" ")[-1])
+
+            # Save the game
+            leage.add_game(
+                Game(
+                    team_a=team_a,
+                    team_a_goals=goals_a,
+                    team_b=team_b,
+                    team_b_goals=goals_b,
+                ),
+            )
+
+    # 3. Rank the teams
+    rankings = leage.team_rankings
+
+    # 4. Save the ranking to the specified "output_file"
+    with open(output_file, "w+") as f:
+        for ranking in rankings:
+            f.write(str(ranking))
+            f.write("\n")
 
 
 if __name__ == "__main__":
