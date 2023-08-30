@@ -59,6 +59,107 @@ Replace `{env name}` below with your desired conda environment name.
 
 4. Add your conda environment to your IDE
 
+## Running Locally
+
+### Run the CLI Locally
+
+Activate the conda environment
+```shell
+conda activate {env name}
+```
+
+You can run the CLI with the following shell command
+
+```shell
+python3 cli.py {input file path} {output file path}
+```
+
+For example, you can use this to run on the `sample-input.txt` file and output to the `real-output.txt` file in the root of the repository
+
+```shell
+python3 cli.py sample-input.txt real-output.txt
+```
+
+You can find more information on the CLI with the following shell command
+
+```shell
+python3 cli.py --help
+```
+
+The CLI tests can be found under `tests/test_cli.py`.
+
+### Running Tests
+
+Activate the conda environment (you must have test dependencies installed)
+```shell
+conda activate {env name}
+```
+
+You can run all tests with `pytest` using the following shell command
+```shell
+pytest . --cov
+```
+
+This will run all tests and output test coverage to the terminal.
+If you'd like to run specific tests, please check the [pytest documentation](https://docs.pytest.org/en/7.4.x/how-to/usage.html#specifying-which-tests-to-run).
+All tests are marked as either `unit`, `integration`, or `e2e` tests.
+
+At the time of challenge completion, the test suite passes with a coverage of 99%.
+I wish I could get that last 1%, but it's just the `cli()` entrypoint in `cli.py` so ¯\_(ツ)_/¯ no big deal
+
+```text
+=========================== test session starts ============================
+platform darwin -- Python 3.11.5, pytest-7.4.0, pluggy-1.3.0
+rootdir: /Users/fletchereaston/Documents/GitHub/soccer-challenge
+configfile: pyproject.toml
+plugins: cov-4.1.0, lazy-fixture-0.6.3
+collected 13 items
+
+tests/test_cli.py ..                                                 [ 15%]
+tests/test_games.py ...                                              [ 38%]
+tests/test_league.py ..                                              [ 53%]
+tests/test_rankings.py ......                                        [100%]
+
+---------- coverage: platform darwin, python 3.11.5-final-0 ----------
+Name                     Stmts   Miss  Cover
+--------------------------------------------
+cli.py                      78      2    97%
+tests/__init__.py            0      0   100%
+tests/test_cli.py           18      0   100%
+tests/test_games.py         20      0   100%
+tests/test_league.py        16      0   100%
+tests/test_rankings.py      26      0   100%
+--------------------------------------------
+TOTAL                      158      2    99%
+
+
+============================ 13 passed in 0.07s ============================
+```
+
+## Review
+
+I'm really happy with what I did for the challenge, I really have no major areas that I think could use improvement for this challenge.
+
+I think the only noteworthy thing is that my inital plan (preserved above) had tests coming later and command/CLI stuff coming earlier.
+In reality, I tested each class/method/property as I went and only did the full command/CLI implementation at the end.
+
+The part I'm probably most proud of is my usage of the `Counter` collection.
+I feel like `Counter` is something most Python devs don't know about, but provides a crazy amount of utility out of the box.
+If you don't know what `Counter` is, please [go check it out](https://docs.python.org/3/library/collections.html#collections.Counter).
+
+If the "goal differential" challenge was added, I wouldn't need to do any real overhauls to how this code works.
+Essentially, the changes would involve...
+
+1. Add this field to the `League` class: `_team_goal_differential: Counter[str] = field(default_factory=Counter)`
+2. Add this field to the `Ranking` class: `goal_differential: int`
+3. Update various methods/properties to include goal differentials
+   - `__str__` on `Ranking`
+   - `__lt__` on `Ranking`
+   - `add_game` on `League`
+   - `team_rankings` on `League`
+
+I could also add a helper method to the `Game` class for getting the goal differentials for each team, but ¯\_(ツ)_/¯
+maybe not super useful, it's easy enough to calculate that
 
 # The Challenge
 
