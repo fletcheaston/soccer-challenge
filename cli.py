@@ -77,13 +77,34 @@ class League:
         self._team_points[game.team_b] += game.points_for(game.team_b)
 
     @property
-    def teams(self) -> set[str]:
-        return set(self._team_points.keys())
-
-    @property
     def team_rankings(self) -> list[Ranking]:
         """Returns a sorted list of team rankings"""
-        return []
+        rankings: list[Ranking] = []
+
+        current_place = 0
+        last_points = -1
+
+        # Using the "most_common" gives us the teams ordered by points descending
+        for team, points in self._team_points.most_common():
+            # Only jump the current_place forward when the points have changed since the last iteration
+            # This lets tied teams have the same place
+            # And "jumps" forward places when the tie is over
+            if points != last_points:
+                current_place = len(rankings) + 1
+
+            last_points = points
+
+            # Add the ranking
+            rankings.append(
+                Ranking(
+                    place=current_place,
+                    team=team,
+                    points=points,
+                ),
+            )
+
+        # Sorting here really just does alphabetical sorting on ties
+        return sorted(rankings)
 
 
 @cli.command()
