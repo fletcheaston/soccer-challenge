@@ -69,20 +69,32 @@ Activate the conda environment
 conda activate {env name}
 ```
 
-You can run the CLI with the following shell command
+You can run the CLI with the following shell commands
+
+#### Output results to terminal
 
 ```shell
-python3 cli.py {input file path} {output file path}
+python3 cli.py {input file path}
+```
+
+For example, you can use this to run on the `sample-input.txt` file and output to the terminal
+```shell
+python3 cli.py sample-input.txt
+```
+
+#### Output results to a file
+```shell
+python3 cli.py {input file path} --output-file {output file path}
 ```
 
 For example, you can use this to run on the `sample-input.txt` file and output to the `real-output.txt` file in the root of the repository
-
 ```shell
-python3 cli.py sample-input.txt real-output.txt
+python3 cli.py sample-input.txt --output-file real-output.txt
 ```
 
-You can find more information on the CLI with the following shell command
+#### More info
 
+You can find more information on the CLI with the following shell command
 ```shell
 python3 cli.py --help
 ```
@@ -109,32 +121,32 @@ At the time of challenge completion, the test suite passes with a coverage of 99
 I wish I could get that last 1%, but it's just the `cli()` entrypoint in `cli.py` so ¯\_(ツ)_/¯ no big deal
 
 ```text
-=========================== test session starts ============================
+======================== test session starts =========================
 platform darwin -- Python 3.11.5, pytest-7.4.0, pluggy-1.3.0
 rootdir: /Users/fletchereaston/Documents/GitHub/soccer-challenge
 configfile: pyproject.toml
 plugins: cov-4.1.0, lazy-fixture-0.6.3
-collected 13 items
+collected 14 items
 
-tests/test_cli.py ..                                                 [ 15%]
-tests/test_games.py ...                                              [ 38%]
-tests/test_league.py ..                                              [ 53%]
-tests/test_rankings.py ......                                        [100%]
+tests/test_cli.py ...                                          [ 21%]
+tests/test_games.py ...                                        [ 42%]
+tests/test_league.py ..                                        [ 57%]
+tests/test_rankings.py ......                                  [100%]
 
 ---------- coverage: platform darwin, python 3.11.5-final-0 ----------
 Name                     Stmts   Miss  Cover
 --------------------------------------------
-cli.py                      78      2    97%
+cli.py                      81      2    98%
 tests/__init__.py            0      0   100%
-tests/test_cli.py           18      0   100%
+tests/test_cli.py           29      0   100%
 tests/test_games.py         20      0   100%
 tests/test_league.py        16      0   100%
 tests/test_rankings.py      26      0   100%
 --------------------------------------------
-TOTAL                      158      2    99%
+TOTAL                      172      2    99%
 
 
-============================ 13 passed in 0.07s ============================
+========================= 14 passed in 0.07s =========================
 ```
 
 ## Review
