@@ -3,7 +3,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from typer import Typer
+from typer import Typer, Option
 
 
 ################################################################################
@@ -114,7 +114,10 @@ cli = Typer()
 
 
 @cli.command()
-def process_games(input_file: Path, output_file: Path) -> None:
+def process_games(
+    input_file: Path,
+    output_file: Path = Option(None),  # noqa: B008
+) -> None:
     """
     ===========================================================================
 
@@ -126,7 +129,7 @@ def process_games(input_file: Path, output_file: Path) -> None:
 
     3. Rank the teams
 
-    4. Save the ranking to the specified "output_file"
+    4. Save the ranking to the specified "output_file" if "output_file" is specified, console if not
 
     ===========================================================================
 
@@ -140,9 +143,6 @@ def process_games(input_file: Path, output_file: Path) -> None:
 
     if not input_file.exists():
         raise ValueError("Input file doesn't exist.")
-
-    if output_file.exists():
-        logging.warning("Output file already exists, overwriting.")
 
     # Data structure setup
     leage = League()
@@ -176,11 +176,19 @@ def process_games(input_file: Path, output_file: Path) -> None:
     # 3. Rank the teams
     rankings = leage.team_rankings
 
-    # 4. Save the ranking to the specified "output_file"
-    with open(output_file, "w+") as f:
+    # 4. Save the ranking to the specified "output_file" if "output_file" is specified, console if not
+    if output_file is not None:
+        if output_file.exists():
+            logging.warning("Output file already exists, overwriting.")
+
+        with open(output_file, "w+") as f:
+            for ranking in rankings:
+                f.write(str(ranking))
+                f.write("\n")
+
+    else:
         for ranking in rankings:
-            f.write(str(ranking))
-            f.write("\n")
+            print(ranking)
 
 
 if __name__ == "__main__":

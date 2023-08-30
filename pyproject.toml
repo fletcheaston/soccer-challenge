@@ -42,11 +42,9 @@ select = [
     "W",  # pycodestyle warnings
     "C90",  # mccabe complexity
     "N",  # pep8-naming
-    "UP",  # pyupgrade
     "B",  # flake8-bugbear
     "COM",  # flake8-commas
     "C4",  # flake8-comprehensions
-    "T20",  # flake8-print
     "PYI",  # flake8-pyi
     "Q",  # flake8-quotes
     "SLF",  # flake8-self
